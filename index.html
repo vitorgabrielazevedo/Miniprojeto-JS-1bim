@@ -22,11 +22,9 @@
         }
 
         const validarProduto = (produto) => {
-            for(let i = 0; i < produtos.length; i++){
-                if(produto.nome === "" || produto.nome === produtos[i].nome){
-                    while(produto.nome === "" || produto.nome === produtos[i].nome){
-                        produto.nome = prompt("Informe o nome do produto:")
-                    }
+            if(produto.nome === ""){
+                while(produto.nome === ""){
+                    produto.nome = prompt("Informe o nome do produto:")
                 }
             }
 
@@ -57,14 +55,13 @@
                 adicionarProduto(produto)
             }
             
-            console.log(produto)
             alert("Produto cadastrado com sucesso!")
         }
 
         const buscarProduto = () => {
             const nome = prompt("Nome do produto que deseja buscar:")
             let achou = false
-            let mensagem = `Id - Nome - Preço - Descrição \n`
+            let mensagem = `ID - Nome - Preço - Descrição \n\n`
 
             for(let i = 0; i < produtos.length; i++){
                 if(produtos[i].nome === nome){
@@ -80,18 +77,6 @@
             }
         }
 
-        const checarAtualizacao = () => {
-            for(let i = 0; i < produtos.length; i++){
-                for(let j = 0; j < produtos.length; j++){
-                    if(produtos[i].nome === produtos[j].nome){
-                        while(produtos[i].nome === produtos[j].nome){
-                            return true
-                        }
-                    }
-                }
-            }
-        }
-
         const atualizarProduto = () => {
             const nome = prompt("Nome do produto que deseja atualizar:")
             let achou = false
@@ -100,15 +85,17 @@
             for(let i = 0; i < produtos.length; i++){
                 if(produtos[i].nome === nome){
                     achou = true
-                    produtos[i].nome = prompt("Novo nome:")
-
-                    if(checarAtualizacao()){
+                    if(confirm(`
+                    ${produtos[i].id} - ${produtos[i].nome} - ${produtos[i].preco} - ${produtos[i].descricao} \n\n
+                    Deseja atualizar esse produto?
+                    `)){
                         produtos[i].nome = prompt("Novo nome:")
+                        produtos[i].preco = prompt("Novo preço:")
+                        produtos[i].descricao = prompt("Nova descrição:")
+                        alert("Produto atualizado com sucesso")
+                    }else{
+                        alert("Esse produto não foi atualizado")
                     }
-
-                    produtos[i].preco = prompt("Novo preço:")
-                    produtos[i].descricao = prompt("Nova descrição:")
-                    alert("Produto atualizado com sucesso")
                 }
             }
 
@@ -119,7 +106,7 @@
         }
 
         const listarProdutos = () => {
-            let mensagem = `Id - Nome - Preço - Descrição \n`
+            let mensagem = `ID - Nome - Preço - Descrição \n\n`
 
             for(let i = 0; i < produtos.length; i++){
                 mensagem += `${produtos[i].id} - ${produtos[i].nome} - ${produtos[i].preco} - ${produtos[i].descricao} \n`
@@ -135,8 +122,15 @@
             for(let i = 0; i < produtos.length; i++){
                 if(produtos[i].nome === nome){
                     achou = true
-                    produtos.splice(i, 1)
-                    alert("Produto excluído com sucesso")
+                    if(confirm(`
+                    ${produtos[i].id} - ${produtos[i].nome} - ${produtos[i].preco} - ${produtos[i].descricao} \n\n
+                    Deseja excluir esse produto?
+                    `)){
+                        produtos.splice(i, 1)
+                        alert("Produto excluído com sucesso")
+                    }else{
+                        alert("Esse produto não foi excluído")
+                    }
                 }
             }
 
@@ -182,6 +176,8 @@
                 alert("Valor inválido!")
             }
         }while(true)
+
+        // Vitor Gabriel de Azevedo Oliveira
     </script>
 </body>
 </html>
