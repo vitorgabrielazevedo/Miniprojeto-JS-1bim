@@ -15,7 +15,7 @@
 
             produto.id = id
             produto.nome = prompt("Nome do produto:")
-            produto.preco = prompt("Preço do produto:")
+            produto.preco = Number(prompt("Preço do produto:"))
             produto.descricao = prompt("Descrição do produto:")
 
             return produto
@@ -28,9 +28,9 @@
                 }
             }
 
-            if(produto.preco === "0" || produto.preco === ""){
-                while(produto.preco === "0" || produto.preco === ""){
-                    produto.preco = prompt("Informe o preço do produto:")
+            if(produto.preco === 0 || produto.preco === ""){
+                while(produto.preco === 0 || produto.preco === ""){
+                    produto.preco = Number(prompt("Informe o preço do produto:"))
                 }
             }
 
@@ -90,7 +90,7 @@
                     Deseja atualizar esse produto?
                     `)){
                         produtos[i].nome = prompt("Novo nome:")
-                        produtos[i].preco = prompt("Novo preço:")
+                        produtos[i].preco = Number(prompt("Novo preço:"))
                         produtos[i].descricao = prompt("Nova descrição:")
                         alert("Produto atualizado com sucesso")
                     }else{
