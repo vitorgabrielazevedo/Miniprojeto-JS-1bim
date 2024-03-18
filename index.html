@@ -92,7 +92,9 @@
                         produtos[i].nome = prompt("Novo nome:")
                         produtos[i].preco = Number(prompt("Novo preço:"))
                         produtos[i].descricao = prompt("Nova descrição:")
-                        alert("Produto atualizado com sucesso")
+                        if(validarProduto(produtos[i])){
+                            alert("Produto atualizado com sucesso")
+                        }
                     }else{
                         alert("Esse produto não foi atualizado")
                     }
